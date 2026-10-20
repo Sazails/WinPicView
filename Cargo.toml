@@ -1,0 +1,31 @@
+[package]
+name = "winpicview"
+version = "0.1.0"
+edition = "2021"
+description = "A fast, minimal, offline photo viewer for Windows"
+build = "build.rs"
+license = "MIT OR Apache-2.0"
+readme = "README.md"
+keywords = ["image-viewer", "photo-viewer", "windows", "winit"]
+categories = ["multimedia::images"]
+
+[dependencies]
+arboard = { version = "3.7", default-features = false, features = ["image-data"] }
+fontdue = "0.9"
+image = { version = "0.25", default-features = false, features = ["png", "jpeg", "webp", "gif", "bmp", "tiff", "ico", "tga", "qoi", "hdr", "pnm", "exr"] }
+rfd = "0.17"
+softbuffer = { version = "0.4", default-features = false }
+windows-sys = { version = "0.61", features = ["Win32_Foundation", "Win32_UI_Shell", "Win32_Graphics_Dwm", "Win32_UI_WindowsAndMessaging"] }
+winit = { version = "0.30", default-features = false, features = ["rwh_06"] }
+winreg = "0.56"
+
+[build-dependencies]
+image = { version = "0.25", default-features = false, features = ["png"] }
+winresource = "0.1"
+
+[profile.release]
+opt-level = 3
+lto = true
+codegen-units = 1
+panic = "abort"
+strip = true
